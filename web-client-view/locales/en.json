@@ -1,0 +1,6 @@
+{
+    "chats-ui": {
+        "input-placeholder": "Type some message...",
+        "send-button": "Send"
+    }
+}
