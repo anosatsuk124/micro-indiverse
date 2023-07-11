@@ -27,8 +27,8 @@ const MessagesHistory: React.FC = () => {
     return (
         <Container sx={{ overflow: 'auto', height: '80vh' }}>
             <Stack spacing={2}>
-                {messages.map((msg) => (
-                    <MessageBox msg={msg} />
+                {messages.map((msg, index) => (
+                    <MessageBox msg={msg} key={index} />
                 ))}
             </Stack>
         </Container>

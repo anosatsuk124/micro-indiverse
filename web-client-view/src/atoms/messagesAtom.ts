@@ -1,6 +1,6 @@
-import { Messages } from 'client-core';
+import type { Message } from 'client-core';
 import { atom } from 'jotai';
 
-const messagesAtom = atom<Messages>([]);
+const messagesAtom = atom<Message[]>([]);
 
 export { messagesAtom };

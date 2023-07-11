@@ -5,24 +5,37 @@ import { Message, stringToUtf8String, utf8StringToString } from 'client-core';
 import { v4 as uuidv4 } from 'uuid';
 import { useAtom } from 'jotai';
 import { messagesAtom } from '@/atoms/messagesAtom';
+import { addMessage } from '@/features/updateMessage';
 
 const SendMessageBox: React.FC = () => {
     const { t } = useTranslation();
 
     const [message, setMessage] = React.useState<Message>({
         id: stringToUtf8String(uuidv4()),
+        user_id: stringToUtf8String(uuidv4()),
         text: stringToUtf8String(''),
+        timestamp: null,
     });
 
+    //FIXME
     const [messages, setMessages] = useAtom(messagesAtom);
 
     const onSend = () => {
-        setMessages([...messages, message]);
+        const messageWithTimestamp = {
+            ...message,
+            timestamp: new Date(),
+        };
+        setMessage(messageWithTimestamp);
+        console.log(messageWithTimestamp);
+        addMessage(messageWithTimestamp).catch((e) => console.log(e));
+
+        setMessages([...messages, messageWithTimestamp]);
 
         // FIXME
         setMessage({
             ...message,
             text: stringToUtf8String(''),
+            id: stringToUtf8String(uuidv4()),
         });
     };
 
