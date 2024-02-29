@@ -1,0 +1,40 @@
+## Workspace's configuration
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Satsuki Akiba <anosatsuk124@gmail.com>"]
+
+[workspace]
+default-members = ["./"]
+members = [
+  "./",
+  # "crates/",
+]
+
+[workspace.dependencies]
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+thiserror = "1.0.57"
+tokio = { version = "1.36.0", features = ["full"] }
+
+## THIS(main) crate's configuration
+
+[package]
+name = "server"
+edition = "2021"
+publish = false
+version.workspace = true
+authors.workspace = true
+
+[features]
+default = []
+
+[profile.release]
+lto = true
+
+[dependencies]
+clap = { version = "4.5.1", features = ["derive"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
